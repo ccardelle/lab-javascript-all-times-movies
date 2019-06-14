@@ -1,104 +1,95 @@
 /* eslint no-restricted-globals: 'off' */
-// Turn duration of the movies from hours to minutes 
+// Turn duration of the movies from hours to minutes
 
-function turnHoursToMinutes (arr) {
+function turnHoursToMinutes(arr) {
   var newArray = arr.map(function(arr) {
     let movie = arr.duration.split(" ");
-    let totalMinutes = 0; 
-      movie.forEach(function(x){  
-          if(x.includes('h')){  
-              totalMinutes+=Number(x.replace('h',''))*60 
-          } 
-          if(x.includes('min')){
-              totalMinutes+=Number(x.replace('min','')) 
-          }
-      })
-      return {...arr, duration: totalMinutes}
-
+    let totalMinutes = 0;
+    movie.forEach(function(x) {
+      if (x.includes("h")) {
+        totalMinutes += Number(x.replace("h", "")) * 60;
+      }
+      if (x.includes("min")) {
+        totalMinutes += Number(x.replace("min", ""));
+      }
+    });
+    return { ...arr, duration: totalMinutes };
   });
-  
-  return(newArray);
+
+  return newArray;
 }
 
 // Get the average of all rates with 2 decimals
 
-function ratesAverage (arr) {
+function ratesAverage(arr) {
   let totalRating = 0;
   arr.forEach(function(n) {
     totalRating += n.rate;
-    
   });
 
-return (totalRating / arr.length);
+  return totalRating / arr.length;
 }
 
 // Get the average of Drama Movies
 
-function dramaMoviesRate (arr) {
+function dramaMoviesRate(arr) {
   let totalDramaRates = 0;
   let totalDramaMovies = 0;
   arr.forEach(function(y) {
-    if (y.genre.includes("Drama")){
+    if (y.genre.includes("Drama")) {
       totalDramaMovies++;
       totalDramaRates += y.rate;
     }
   });
 
-    if (totalDramaMovies === 0) {
-      return undefined;
+  if (totalDramaMovies === 0) {
+    return undefined;
   }
 
   return parseFloat((totalDramaRates / totalDramaMovies).toFixed(2));
-
 }
 
 // Order by time duration, in growing order
 
-function orderByDuration (arr) {
-let newArray = turnHoursToMinutes(arr);
+function orderByDuration(arr) {
+  let newArray = turnHoursToMinutes(arr);
 
-function compare (a,b) {
-  return a.duration - b.duration;
-} 
-  return (newArray.sort(compare)); 
-
- 
-
-} 
-
-  
-
+  function compare(a, b) {
+    return a.duration - b.duration;
+  }
+  return newArray.sort(compare);
+}
 
 // How many movies did STEVEN SPIELBERG
-function howManyMovies (arr) {
+function howManyMovies(arr) {
   let directedMovies = 0;
   let newArray = arr.filter(function(dir) {
-    return dir.director === "Steven Spielberg"
+    return dir.director === "Steven Spielberg";
   });
-  newArray.forEach(function(y) {
-    if(y.genre.includes("Drama")) {
-      directedMovies++;
-    } 
-  });
-  if (arr[0] === undefined ) {
-    return undefined;
-}  else {
 
-  return (`Steven Spielberg directed ${directedMovies} drama movies!`);
+  newArray.forEach(function(y) {
+    if (y.genre.includes("Drama")) {
+      directedMovies++;
+    }
+  });
+  if (arr[0] === undefined) {
+    return undefined;
+  } else {
+    return `Steven Spielberg directed ${directedMovies} drama movies!`;
   }
 }
 
-  
-
-
-
 // Order by title and print the first 20 titles
-function orderAlphabetically (arr) {
-for (i = 0; i < 20; i++) {
- arr.sort
+function orderAlphabetically(arr) {
+  let newArray = arr.sort(function(a, b) {
+    return a.title < b.title;
+  });
+  console.log(newArray);
+
+  for (i = 0; i < 20; i++) {}
 }
 
 // Best yearly rate average
-function bestYearAvg () {
+function bestYearAvg() {}
 
-}
+// Lab to explain testing principles. Uses Jasmine for the automated testing system
